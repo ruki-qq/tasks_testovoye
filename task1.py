@@ -7,6 +7,7 @@ def strict(func):
             if type(varvalue) is not vartypes[varname]:
                 raise TypeError(f"Wrong type for {varname}: expected {vartypes[varname]}, got {type(varvalue)}")
         return func(*args, **kwargs)
+
     return wrapper
 
 
