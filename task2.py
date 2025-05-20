@@ -9,7 +9,7 @@ NUM_OF_MEMBERS = {}
 
 
 def get_categories(continues_from: str = "") -> list[str]:
-    result = requests.get(
+    result: requests.Response = requests.get(
         API,
         params={
             "action": "query",
