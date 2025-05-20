@@ -1,11 +1,13 @@
-import requests
 import time
+
+import requests
+
 
 API = "https://ru.wikipedia.org/w/api.php"
 ON_PAGE = 500
 CATEGORY = "Категория:Животные_по_алфавиту"
 CURR_CHAR = "А"
-NUM_OF_MEMBERS = {}
+NUM_OF_MEMBERS: dict[str | int] = {}
 
 
 def get_categories(continues_from: str = "") -> list[str]:
@@ -24,7 +26,7 @@ def get_categories(continues_from: str = "") -> list[str]:
     return result.json()
 
 
-def get_members(res: list[str]) -> str:
+def get_members(res: list[str]) -> None:
     global NUM_OF_MEMBERS, CURR_CHAR
     for member in res["query"]["categorymembers"]:
         member_title: str = member["title"][0]
@@ -45,7 +47,6 @@ def main():
     with open("beasts.csv", "w", encoding="utf8") as f:
         for key in NUM_OF_MEMBERS:
             f.write(f"{key},{NUM_OF_MEMBERS[key]}\n")
-    print(NUM_OF_MEMBERS)
 
 
 if __name__ == "__main__":
